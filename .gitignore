@@ -1,4 +1,18 @@
+# Eclipse
+.metadata
 .project
 .settings
 .classpath
+
+# VIM
+*.swp
+
+# IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+idea
+
+# Maven
 target

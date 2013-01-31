@@ -6,147 +6,348 @@
     <artifactId>bouncycastle</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>JBoss Application Server: Subsystem bouncycastle Artifact</name>
+    <name>JBoss Application Server: Bouncy Castle Module Parent</name>
+
+    <modules>
+        <module>jdk12</module>
+        <module>jdk14</module>
+        <module>jdk15</module>
+        <module>jdk15on</module>
+        <module>jdk16</module>
+    </modules>
 
     <properties>
         <module.name>org.bouncycastle</module.name>
-        <project.build.sourceEncoding>cp1252</project.build.sourceEncoding>
+        <jboss.home>${env.JBOSS_HOME}</jboss.home>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <version.java>1.6</version.java>
+
+        <version.org.bouncycastle.jdk12>130</version.org.bouncycastle.jdk12>
+        <version.org.bouncycastle.bcprov-jdk12>${version.org.bouncycastle.jdk12}</version.org.bouncycastle.bcprov-jdk12>
+        <version.org.bouncycastle.bcpg-jdk12>${version.org.bouncycastle.jdk12}</version.org.bouncycastle.bcpg-jdk12>
+
+        <version.org.bouncycastle.jdk14>1.47</version.org.bouncycastle.jdk14>
+        <version.org.bouncycastle.bcprov-jdk14>${version.org.bouncycastle.jdk14}</version.org.bouncycastle.bcprov-jdk14>
+        <version.org.bouncycastle.bcmail-jdk14>${version.org.bouncycastle.jdk14}</version.org.bouncycastle.bcmail-jdk14>
+        <version.org.bouncycastle.bcpg-jdk14>${version.org.bouncycastle.jdk14}</version.org.bouncycastle.bcpg-jdk14>
+        <version.org.bouncycastle.bctsp-jdk14>1.46</version.org.bouncycastle.bctsp-jdk14>
+        <version.org.bouncycastle.bcpkix-jdk14>${version.org.bouncycastle.jdk14}</version.org.bouncycastle.bcpkix-jdk14>
+
+        <version.org.bouncycastle.jdk15>1.46</version.org.bouncycastle.jdk15>
+        <version.org.bouncycastle.bcprov-jdk15>${version.org.bouncycastle.jdk15}</version.org.bouncycastle.bcprov-jdk15>
+        <version.org.bouncycastle.bcprov-ext-jdk15>${version.org.bouncycastle.jdk15}</version.org.bouncycastle.bcprov-ext-jdk15>
+        <version.org.bouncycastle.bcmail-jdk15>${version.org.bouncycastle.jdk15}</version.org.bouncycastle.bcmail-jdk15>
+        <version.org.bouncycastle.bcpg-jdk15>${version.org.bouncycastle.jdk15}</version.org.bouncycastle.bcpg-jdk15>
+
+        <version.org.bouncycastle.jdk16>1.46</version.org.bouncycastle.jdk16>
+        <version.org.bouncycastle.bcprov-jdk16>${version.org.bouncycastle.jdk16}</version.org.bouncycastle.bcprov-jdk16>
+        <version.org.bouncycastle.bctsp-jdk16>${version.org.bouncycastle.jdk16}</version.org.bouncycastle.bctsp-jdk16>
+        <version.org.bouncycastle.bcpg-jdk16>${version.org.bouncycastle.jdk16}</version.org.bouncycastle.bcpg-jdk16>
+        <version.org.bouncycastle.bcmail-jdk16>${version.org.bouncycastle.jdk16}</version.org.bouncycastle.bcmail-jdk16>
+        <version.org.bouncycastle.bcprov-ext-jdk16>${version.org.bouncycastle.jdk16}</version.org.bouncycastle.bcprov-ext-jdk16>
+
+        <version.org.bouncycastle.jdk15on>1.47</version.org.bouncycastle.jdk15on>
+        <version.org.bouncycastle.bcprov-jdk15on>${version.org.bouncycastle.jdk15on}</version.org.bouncycastle.bcprov-jdk15on>
+        <version.org.bouncycastle.bcpkix-jdk15on>${version.org.bouncycastle.jdk15on}</version.org.bouncycastle.bcpkix-jdk15on>
+        <version.org.bouncycastle.bcpg-jdk15on>${version.org.bouncycastle.jdk15on}</version.org.bouncycastle.bcpg-jdk15on>
+        <version.org.bouncycastle.bcmail-jdk15on>${version.org.bouncycastle.jdk15on}</version.org.bouncycastle.bcmail-jdk15on>
+        <version.org.bouncycastle.bcprov-ext-jdk15on>${version.org.bouncycastle.jdk15on}</version.org.bouncycastle.bcprov-ext-jdk15on>
+
+        <version.org.apache.maven.plugins.maven-antrun-plugin>1.6</version.org.apache.maven.plugins.maven-antrun-plugin>
+        <version.org.apache.maven.plugins.maven-compiler-plugin>2.3.1</version.org.apache.maven.plugins.maven-compiler-plugin>
+        <version.org.apache.maven.plugins.maven-dependency-plugin>2.4</version.org.apache.maven.plugins.maven-dependency-plugin>
+        <version.org.codehaus.mojo.exec-maven-plugin>1.2.1</version.org.codehaus.mojo.exec-maven-plugin>
     </properties>
 
     <build>
-        <!-- Maven will append the version to the finalName (which is the name given to the generated war, and hence the 
+        <!-- Maven will append the version to the finalName (which is the name given to the generated war, and hence the
             context root) -->
         <finalName>${project.artifactId}</finalName>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.4</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <inherited>false</inherited>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>create-dist</id>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <phase>compile</phase>
-                        <configuration>
-                            <target>
-                                <!-- Replace the '.' in ${module.name} with '/' to get its path -->
-                                <tempfile property="temp.file" />
-                                <echo message="${module.name}" file="${temp.file}" />
-                                <replace file="${temp.file}" token="." value="/" />
-                                <loadfile srcfile="${temp.file}" property="module.path" />
-                                <delete file="${temp.file}" />
-                                <delete dir="target/module" />
-                                <property name="module.dir" value="target/module/${module.path}/main" />
-                                <copy file="src/main/resources/module/main/module.xml" tofile="${module.dir}/module.xml" />
-                                <copy todir="${module.dir}">
-                                    <fileset dir="target/dependency">
-                                        <include name="*.jar" />
-                                        <include name="*.index" />
-                                    </fileset>
-                                </copy>
-
-                                <echo>Module ${module.name} has been created in the target/module directory. Copy to
-                                    your JBoss AS 7 installation.</echo>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>sh</executable>
-                    <workingDirectory>target/dependency</workingDirectory>
-                    <arguments>
-                        <argument>-c</argument>
-                        <argument>for a in *.jar; do jar -tf $a | egrep '/$' | sort | sed 's/\/$//g' > $a.index; done</argument>
-                    </arguments>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.3</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/zip.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${version.org.apache.maven.plugins.maven-compiler-plugin}</version>
+                    <configuration>
+                        <source>${version.java}</source>
+                        <target>${version.java}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${version.org.apache.maven.plugins.maven-dependency-plugin}</version>
+                    <executions>
+                        <execution>
+                            <id>copy-dependencies</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${version.org.apache.maven.plugins.maven-antrun-plugin}</version>
+                    <executions>
+                        <execution>
+                            <id>create-distribution</id>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <phase>package</phase>
+                            <configuration>
+                                <target>
+                                    <property name="module.dir" value="${project.build.directory}/modules/org/bouncycastle/${project.artifactId}/main" />
+                                    <mkdir dir="${module.dir}"/>
+                                    <copy file="src/main/resources/module.xml" tofile="${module.dir}/module.xml" />
+                                    <copy todir="${module.dir}">
+                                        <fileset dir="target/dependency">
+                                            <include name="*.jar" />
+                                            <include name="*.index" />
+                                        </fileset>
+                                    </copy>
+                                    <echo>Module ${module.name} has been created in the ${module.dir} directory.</echo>
+                                </target>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>install-distribution</id>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <phase>install</phase>
+                            <configuration>
+                                <target>
+                                    <property name="module.dir" value="${jboss.home}/modules/org/bouncycastle/${project.artifactId}/main" />
+                                    <mkdir dir="${module.dir}"/>
+                                    <copy file="src/main/resources/module.xml" tofile="${module.dir}/module.xml" />
+                                    <copy todir="${module.dir}">
+                                        <fileset dir="target/dependency">
+                                            <include name="*.jar" />
+                                            <include name="*.index" />
+                                        </fileset>
+                                    </copy>
+                                    <echo>Module ${module.name} has been created in the ${module.dir} directory.</echo>
+                                </target>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${version.org.codehaus.mojo.exec-maven-plugin}</version>
+                    <executions>
+                        <execution>
+                            <phase>process-sources</phase>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <executable>sh</executable>
+                        <workingDirectory>target/dependency</workingDirectory>
+                        <arguments>
+                            <argument>-c</argument>
+                            <argument>for a in *.jar; do jar -tf $a | egrep '/$' | sort | sed 's/\/$//g' > $a.index; done</argument>
+                        </arguments>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
-    <dependencies>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.47</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
-            <version>1.47</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpg-jdk15on</artifactId>
-            <version>1.47</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcmail-jdk15on</artifactId>
-            <version>1.47</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-ext-jdk15on</artifactId>
-            <version>1.47</version>
-        </dependency>
-    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>jdk12</id>
+            <activation>
+                <property><name>jdk12</name></property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>jdk12</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>jdk14</id>
+            <activation>
+                <property><name>jdk14</name></property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>jdk14</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>jdk15</id>
+            <activation>
+                <property><name>jdk15</name></property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>jdk15</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>jdk15on</id>
+            <activation>
+                <property><name>jdk15on</name></property>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>jdk15on</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>jdk16</id>
+            <activation>
+                <property><name>jdk16</name></property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>jdk16</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>all</id>
+            <activation>
+                <property><name>all</name></property>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>jdk12</module>
+                <module>jdk14</module>
+                <module>jdk15</module>
+                <module>jdk15on</module>
+                <module>jdk16</module>
+            </modules>
+        </profile>
+    </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk12</artifactId>
+                <version>${version.org.bouncycastle.bcprov-jdk12}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpg-jdk12</artifactId>
+                <version>${version.org.bouncycastle.bcpg-jdk12}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk14</artifactId>
+                <version>${version.org.bouncycastle.bcprov-jdk14}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcmail-jdk14</artifactId>
+                <version>${version.org.bouncycastle.bcmail-jdk14}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpg-jdk14</artifactId>
+                <version>${version.org.bouncycastle.bcpg-jdk14}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bctsp-jdk14</artifactId>
+                <version>${version.org.bouncycastle.bctsp-jdk14}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk14</artifactId>
+                <version>${version.org.bouncycastle.bcpkix-jdk14}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15</artifactId>
+                <version>${version.org.bouncycastle.bcprov-jdk15}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-ext-jdk15</artifactId>
+                <version>${version.org.bouncycastle.bcprov-ext-jdk15}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcmail-jdk15</artifactId>
+                <version>${version.org.bouncycastle.bcmail-jdk15}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpg-jdk15</artifactId>
+                <version>${version.org.bouncycastle.bcpg-jdk15}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>${version.org.bouncycastle.bcprov-jdk15on}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>${version.org.bouncycastle.bcpkix-jdk15on}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpg-jdk15on</artifactId>
+                <version>${version.org.bouncycastle.bcpg-jdk15on}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcmail-jdk15on</artifactId>
+                <version>${version.org.bouncycastle.bcmail-jdk15on}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-ext-jdk15on</artifactId>
+                <version>${version.org.bouncycastle.bcprov-ext-jdk15on}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk16</artifactId>
+                <version>${version.org.bouncycastle.bcprov-jdk16}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bctsp-jdk16</artifactId>
+                <version>${version.org.bouncycastle.bctsp-jdk16}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpg-jdk16</artifactId>
+                <version>${version.org.bouncycastle.bcpg-jdk16}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcmail-jdk16</artifactId>
+                <version>${version.org.bouncycastle.bcmail-jdk16}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-ext-jdk16</artifactId>
+                <version>${version.org.bouncycastle.bcprov-ext-jdk16}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
     <distributionManagement>
         <repository>
             <id>exsolvi-release</id>

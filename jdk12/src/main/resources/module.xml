@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="org.bouncycastle.jdk12">
+    <resources>
+        <resource-root path="bcpg-jdk12-130.jar" />
+        <resource-root path="bcprov-jdk12-130.jar" />
+    </resources>
+
+    <dependencies>
+        <module name="javax.api" />
+    </dependencies>
+</module>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="org.bouncycastle.jdk14">
+    <resources>
+        <resource-root path="bcmail-jdk14-1.47.jar" />
+        <resource-root path="bcpg-jdk14-1.47.jar" />
+        <resource-root path="bcpkix-jdk14-1.47.jar" />
+        <resource-root path="bcprov-jdk14-1.47.jar" />
+        <resource-root path="bctsp-jdk14-1.46.jar" />
+    </resources>
+
+    <dependencies>
+        <module name="javax.api" />
+    </dependencies>
+</module>
