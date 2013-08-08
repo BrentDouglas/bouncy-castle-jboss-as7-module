@@ -105,7 +105,7 @@
                             <phase>package</phase>
                             <configuration>
                                 <target>
-                                    <property name="module.dir" value="${project.build.directory}/modules/org/bouncycastle/${project.artifactId}/main" />
+                                    <property name="module.dir" value="${project.build.directory}/modules/system/layers/base/org/bouncycastle/${project.artifactId}/main" />
                                     <mkdir dir="${module.dir}"/>
                                     <copy file="src/main/resources/module.xml" tofile="${module.dir}/module.xml" />
                                     <copy todir="${module.dir}">
@@ -126,7 +126,7 @@
                             <phase>install</phase>
                             <configuration>
                                 <target>
-                                    <property name="module.dir" value="${jboss.home}/modules/org/bouncycastle/${project.artifactId}/main" />
+                                  <property name="module.dir" value="${jboss.home}/modules/system/layers/base/org/bouncycastle/${project.artifactId}/main" />
                                     <mkdir dir="${module.dir}"/>
                                     <copy file="src/main/resources/module.xml" tofile="${module.dir}/module.xml" />
                                     <copy todir="${module.dir}">

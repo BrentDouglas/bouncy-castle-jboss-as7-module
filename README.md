@@ -3,7 +3,7 @@
 ## Installation
 
 The modules can be build to 
-`<module>/target/modules/org/bouncycastle/<module>/main` with
+`<module>/target/modules/system/layers/base/org/bouncycastle/<module>/main` with
 the `mvn package` goal or installed directly to an JBoss AS7
 installation with the `mvn install` goal. To install directly the
 `JBOSS_HOME` environment variable must be set to the base directory of
@@ -23,9 +23,9 @@ module. You can use the profile `mvn install -Pall` to install all of
 them. The module `jdk15on` will be used if no build profile is provided.
 
 To manually install the modules to an AS7 server copy the directory
-`<module>/target/modules/org/bouncycastle/<module>/main` into the
+`<module>/target/modules/system/layers/base/org/bouncycastle/<module>/main` into the
 corresponding module directory on the server
-`$JBOSS_HOME/modules/org/bouncycastle/<module>/main`.
+`$JBOSS_HOME/modules/system/layers/base/org/bouncycastle/<module>/main`.
 
 ## Usage
 
